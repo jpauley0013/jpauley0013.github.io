@@ -10,7 +10,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-    <!---<style> .btn{margin: 5px} </style>-->
   </head>
 
   <body>
@@ -28,7 +27,7 @@
   </body>
 	
   <script type="text/x-handlebars-template" id="tableTemplate">
-      <table>
+      <table cellspacing='12'>
           <tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
              {{#each rows}}
                 <tr>
@@ -39,44 +38,24 @@
   </script>
 
 	<script>
-      window.onload = async function() {
+      window.onload = async function getData(selected_major) {
           var url = "cit5students.json";     // the data file
           var response = await fetch(url);
 
           if(response.ok) {
-              var data = await response.json();     // variable named data receives an array of objects
+              var data = await response.json(); 
 
-              var templateText = document.getElementById('tableTemplate').innerHTML;  // Get template text 
-              var compiledTemplateText = Handlebars.compile(templateText);            // Compile the Handlebars template
-              compiledHtml = compiledTemplateText({ rows: data })                     // Evaluate the template
+		<!--- cit5students = data.filter( (major) => item.major == selected_major); -->
+		  
+              var templateText = document.getElementById('tableTemplate').innerHTML; 
+              var compiledTemplateText = Handlebars.compile(templateText);   
+              compiledHtml = compiledTemplateText({ rows: data }) 
 			
-              document.getElementById('majorTable').innerHTML = compiledHtml; 	   // put html table into division
+              document.getElementById('majorTable').innerHTML = compiledHtml;
         }
         else {
             document.querySelector('#majorTable').innerHTML = "Data not found";
         }
-
     }
- 
  </script>
-  <!---<script>
-    async function getData(selected_major) {
-        var response = await fetch('cit5students.json'); 
-
-        if(response.ok) {
-            var data = await response.json();
-
-            major_items = data.filter( (major) => item.major == selected_major);    // filter data array for selected meal items 
-                
-           var templateText = document.getElementById('majorTemplate').innerHTML;
-           var compiledTemplateText = Handlebars.compile(templateText);   // get and compile template code
-           compiledHtml = compiledTemplateText({ rows: major_items })      // apply data to template
-           document.getElementById('majorTable').innerHTML = compiledHtml; 
-       }
-       else {
-           document.querySelector('#majorTable').innerHTML = "There was an error, or menu items not found";
-       }	
- 
-  }
-</script>--->
 </html>
