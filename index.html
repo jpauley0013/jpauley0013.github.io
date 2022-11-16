@@ -27,8 +27,8 @@
   </div> 
   </body>
 	
-  <script type="text/x-handlebars-template" id="majorTemplate">
-      <table class="table table-striped">
+  <script type="text/x-handlebars-template" id="tableTemplate">
+      <table>
           <tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
              {{#each rows}}
                 <tr>
@@ -38,7 +38,28 @@
       </table>
   </script>
 
-  <script>
+	<script>
+      window.onload = async function() {
+          var url = "cit5students.json";     // the data file
+          var response = await fetch(url);
+
+          if(response.ok) {
+              var data = await response.json();     // variable named data receives an array of objects
+
+              var templateText = document.getElementById('tableTemplate').innerHTML;  // Get template text 
+              var compiledTemplateText = Handlebars.compile(templateText);            // Compile the Handlebars template
+              compiledHtml = compiledTemplateText({ rows: data })                     // Evaluate the template
+			
+              document.getElementById('majorTable').innerHTML = compiledHtml; 	   // put html table into division
+        }
+        else {
+            document.querySelector('#majorTable').innerHTML = "Data not found";
+        }
+
+    }
+ 
+ </script>
+  <!---<script>
     async function getData(selected_major) {
         var response = await fetch('cit5students.json'); 
 
@@ -57,5 +78,5 @@
        }	
  
   }
-</script>
+</script>--->
 </html>
