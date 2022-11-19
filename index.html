@@ -49,7 +49,7 @@
 		  
               var templateText = document.getElementById('tableTemplate').innerHTML; 
               var compiledTemplateText = Handlebars.compile(templateText);   
-              compiledHtml = compiledTemplateText({ rows: cit5students }) 
+              compiledHtml = compiledTemplateText({ rows.insertCell(): cit5students }) 
 			
               document.getElementById('majorTable').innerHTML = compiledHtml;
         }
