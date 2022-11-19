@@ -38,18 +38,18 @@
   </script>
 
 	<script>
-      window.onload = async function getData(selected_major) {
+      async function getData(selected_major) {
           var url = "cit5students.json";     // the data file
           var response = await fetch(url);
 
           if(response.ok) {
               var data = await response.json(); 
 
-		<!--- //cit5students = data.filter( (major) => item.major == selected_major); -->
+		      cit5students = data.filter( (item) => item.major == selected_major);
 		  
               var templateText = document.getElementById('tableTemplate').innerHTML; 
               var compiledTemplateText = Handlebars.compile(templateText);   
-              compiledHtml = compiledTemplateText({ rows: data }) 
+              compiledHtml = compiledTemplateText({ rows: cit5students }) 
 			
               document.getElementById('majorTable').innerHTML = compiledHtml;
         }
