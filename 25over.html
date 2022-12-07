@@ -52,7 +52,8 @@
        let app = Vue.createApp({
             data() {     // returns an object of data
                 return {
-                    tickets: [],           // array to hold student data
+                    tickets: [], 	// array to hold student data
+			over: [],
                 }
             },
             created() {      // section executes as page loads
@@ -62,7 +63,7 @@
                 async getData() {
                     const response = await fetch('tickets1.json')
                     this.tickets = await response.json()
-                    tickets = data.filter( (ticket) => ticket.actual_speed - ticket.posted_speed >= 25 );      
+                    over = data.filter( (ticket) => ticket.actual_speed - ticket.posted_speed >= 25 );      
                 },
             }
           })
