@@ -66,7 +66,7 @@
                     this.tickets = await response.json()
 		},
 		getOver() {
-                    this.over = this.tickets.filter( (ticket) => ticket.actual_speed - ticket.posted_speed == 25 );      
+                    this.over = this.tickets.filter( (ticket) => (ticket.actual_speed - ticket.posted_speed) == 25 );      
                 }
             },
           })
